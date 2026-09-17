@@ -75,8 +75,8 @@ const TEMPLATES = [
     category: "مشروب",
     name_ar: "قطاف وقصه",
     name_en: "Bean & Tale",
-    image: "./‫إطار _ قوالب مواقع للمطاعم والكافيهات والفاست فود - Brave‬ 9_17_2026 3_23_21 PM.png",
-    previewLink: "8taf-lb7dowwjd-waleed-cd78.vercel.app",
+    image: "./قطاف.png",
+    previewLink: "8taf.vercel.app",
     whatsappMessage: "مرحبًا، أرغب بطلب قالب  قطاف"
   },
   {
