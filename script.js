@@ -66,18 +66,18 @@ const TEMPLATES = [
     category: "مطعم",
     name_ar: "مذاق البيت",
     name_en: "Home Taste",
-    image: "https://picsum.photos/seed/home-taste/600/450",
-    previewLink: "https://example.com/preview/home-taste",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب مذاق البيت"
+    image: "",
+    previewLink: "https://example.com/preview/bean-tale",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب بن وحكاية"
   },
   {
     id: 2,
-    category: "كافيه",
-    name_ar: "بن وحكاية",
+    category: "مشروب",
+    name_ar: "قطاف وقصه",
     name_en: "Bean & Tale",
-    image: "https://picsum.photos/seed/bean-tale/600/450",
-    previewLink: "https://example.com/preview/bean-tale",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب بن وحكاية"
+    image: "./‫إطار _ قوالب مواقع للمطاعم والكافيهات والفاست فود - Brave‬ 9_17_2026 3_23_21 PM.png",
+    previewLink: "8taf-lb7dowwjd-waleed-cd78.vercel.app",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب  قطاف"
   },
   {
     id: 3,
