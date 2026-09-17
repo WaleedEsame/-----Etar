@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>إطار | قوالب مواقع للمطاعم والكافيهات والفاست فود</title>
+
+  <!-- وسم الوصف: اسم الموقع والخدمة اللي بيقدمها -->
+  <meta name="description" content="منصة إطار تقدم أفضل قوالب مواقع للمطاعم والكافيهات والفاست فود. تصاميم احترافية متجاوبة وسريعة وجاهزة للاستخدام.">
+
+  <!-- وسم الكلمات المفتاحية -->
+  <meta name="keywords" content="إطار, قوالب مطاعم, تصميم موقع كافيه, قالب فاست فود, قوالب مواقع جاهزة">
+
+  <!-- ===== أيقونات الموقع (Favicon) =====
+       ⚠️ اختيارية: لو الملفات دي مش موجودة عندك في نفس المجلد، الموقع
+       هيشتغل عادي بس المتصفح هيوري أيقونة افتراضية بدل لوجو موقعك.
+       لو عايز تضيفها، حط الملفات دي بنفس الأسماء في نفس مجلد index.html. -->
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- خط IBM Plex Sans Arabic من Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome لأيقونات قسم المميزات -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- ملف التنسيق الخاص بالموقع -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== الهيدر ===================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-mark">◍</span>
+        <!--
+          الشعار: الصفحة بتحاول تعرض صورة LogoEtar.png. لو الملف مش موجود
+          عندك، هتظهر أيقونة صورة مكسورة. لو معندكش لوجو جاهز دلوقتي،
+          احذفي سطر الـ img دا واستخدمي بس النص جنبه (اسم الموقع).
+        -->
+        <img class="logo-text" src="LogoEtar.png" alt="إطار" onerror="this.style.display='none'">
+        <span class="logo-fallback-text">إطار</span>
+      </div>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#templates">القوالب</a>
+        <a href="#features">المميزات</a>
+        <a href="#steps">كيف تطلب</a>
+        <a href="#templates" class="btn btn-outline nav-cta nav-cta-mobile">تصفّح القوالب</a>
+      </nav>
+
+      <a href="#templates" class="btn btn-outline nav-cta nav-cta-desktop">تصفّح القوالب</a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== قسم الهيرو ===================== -->
+  <section class="hero">
+    <div class="container hero-inner">
+
+      <div class="hero-copy">
+        <p class="hero-eyebrow">قوالب جاهزة لأصحاب المطاعم والكافيهات</p>
+        <h1 class="hero-title">موقع مطعمك يفتح قبل ما يفتح المطعم</h1>
+        <p class="hero-desc">
+          اختر قالبًا جاهزًا مصمم خصيصًا للمطاعم والكافيهات وشركات الفاست فود،
+          شوف شكله الحقيقي بمعاينة حية، واطلبه مباشرة عبر واتساب دون أي تعقيد.
+        </p>
+        <div class="hero-actions">
+          <a href="#templates" class="btn btn-primary">تصفّح 12 قالب</a>
+          <a href="#steps" class="btn btn-ghost">كيف تتم عملية الطلب؟</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">12</span>
+            <span class="stat-label">قالب جاهز</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">3</span>
+            <span class="stat-label">تصنيفات</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">٢٤س</span>
+            <span class="stat-label">رد سريع</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="preview-card">
+          <div class="preview-card-topbar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <div class="preview-card-body">
+            <div class="preview-hero-block">
+              <span class="preview-badge">مطعم</span>
+              <div class="preview-line preview-line-lg"></div>
+              <div class="preview-line preview-line-sm"></div>
+            </div>
+            <div class="preview-menu-row">
+              <div class="preview-dish"></div>
+              <div class="preview-dish"></div>
+              <div class="preview-dish"></div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-chip chip-price">يبدأ من 800 ج.م</div>
+        <div class="floating-chip chip-live">معاينة حية متاحة</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== قسم القوالب ===================== -->
+  <section class="templates-section" id="templates">
+    <div class="container">
+      <div class="section-heading">
+        <h2>اختر القالب المناسب لنشاطك</h2>
+        <p>تصفّح حسب التصنيف، عاين القالب مباشرة، أو اطلبه فورًا عبر واتساب</p>
+      </div>
+
+      <!-- تبويبات التصنيف: تُبنى ديناميكيًا من script.js -->
+      <div class="filter-tabs" id="filterTabs" role="tablist"></div>
+
+      <!-- شبكة الكروت: تُبنى ديناميكيًا من script.js -->
+      <div class="templates-grid" id="templatesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===================== قسم المميزات ===================== -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-heading">
+        <h2>ليه تختار قوالبنا؟</h2>
+        <p>كل قالب مبني على أساس يخدم تجربة الزبون قبل ما يوصل الطاولة</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+          <h3>سرعة تحميل حقيقية</h3>
+          <p>تصميم خفيف بدون حشو، يفتح فورًا على جوال الزبون حتى في شبكة ضعيفة.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+          <h3>متجاوب على كل الشاشات</h3>
+          <p>من الجوال إلى الشاشة الكبيرة، القالب يحافظ على شكله وترتيبه بدقة.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3>قابل للتخصيص بالكامل</h3>
+          <p>الألوان، الشعار، وصور الأطباق كلها قابلة للتعديل حسب هوية مطعمك.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="fa-solid fa-folder-closed"></i></div>
+          <h3>قائمة طعام منظمة</h3>
+          <p>عرض واضح للأصناف والأسعار يسهّل على الزبون القرار بسرعة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== قسم خطوات الطلب ===================== -->
+  <section class="steps-section" id="steps">
+    <div class="container">
+      <div class="section-heading">
+        <h2>كيف تطلب قالبك؟</h2>
+        <p>ثلاث خطوات بسيطة من الاختيار إلى التسليم</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot">١</div>
+          <h3>اختر القالب</h3>
+          <p>تصفّح القوالب وعاين اللي يعجبك بشكل حي قبل القرار.</p>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot">٢</div>
+          <h3>راسلنا على واتساب</h3>
+          <p>اضغط زر الطلب وراح تنفتح رسالة جاهزة باسم القالب المختار.</p>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot">٣</div>
+          <h3>استلم موقعك جاهز</h3>
+          <p>نجهز القالب بمحتوى مطعمك ونسلمك الموقع خلال أيام قليلة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== الفوتر ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="logo">
+        <span class="logo-mark">◍</span>
+        <span class="logo-text">إطار</span>
+      </div>
+      <p class="footer-note">قوالب مواقع جاهزة للمطاعم والكافيهات والفاست فود</p>
+      <a href="#templates" class="btn btn-outline">ابدأ الآن</a>
+    </div>
+  </footer>
+
+  <!-- زر واتساب عائم، رابطه بيتظبط تلقائيًا من script.js -->
+  <a href="#" id="floatingWa" class="wa-float" target="_blank" rel="noopener" aria-label="تواصل واتساب">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

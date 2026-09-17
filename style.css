@@ -1,0 +1,866 @@
+/* =====================================================================
+   ملف التنسيقات - قوالب مواقع مطاعم/كافيهات/فاست فود
+   =====================================================================
+   نظام الألوان:
+   --olive        الأخضر الزيتوني الأساسي (عناوين، أزرار، تمييز)
+   --olive-dark   درجة أغمق من الزيتوني (نص، حواف)
+   --cream        الخلفية الكريمية الفاتحة جدًا
+   --cream-soft   خلفية كروت/أقسام بديلة أفتح قليلًا من الكريمي
+   --ink          لون النص الأساسي الداكن الدافئ
+   --gold         لون ذهبي خافت للتفاصيل الدقيقة فقط (شارات، أرقام)
+   --white        أبيض نقي للكروت
+   ===================================================================== */
+
+:root {
+  --olive: #5F6B3F;
+  --olive-dark: #3E4629;
+  --olive-light: #8A9A5B;
+  --cream: #FBF8F2;
+  --cream-soft: #F3EEE1;
+  --ink: #2B2A22;
+  --ink-soft: #6B6A5C;
+  --gold: #B98B4E;
+  --white: #FFFFFF;
+  --border: #E4DFCF;
+
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+
+  --shadow-soft: 0 12px 30px rgba(62, 70, 41, 0.08);
+  --shadow-card: 0 8px 24px rgba(62, 70, 41, 0.06);
+
+  --font: 'IBM Plex Sans Arabic', 'Tahoma', sans-serif;
+}
+
+
+/* ===================== إعادة ضبط أساسية ===================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.7;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+
+/* احترام تفضيل المستخدم بتقليل الحركة */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* تحسين وضوح التركيز للوصول بلوحة المفاتيح */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--olive);
+  outline-offset: 3px;
+}
+
+
+/* ===================== الأزرار (نمط مشترك) ===================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--olive);
+  color: var(--cream);
+}
+
+.btn-primary:hover {
+  background: var(--olive-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--olive);
+  color: var(--olive-dark);
+}
+
+.btn-outline:hover {
+  background: var(--olive);
+  color: var(--cream);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.btn-ghost:hover {
+  border-color: var(--olive);
+  color: var(--olive-dark);
+}
+
+.btn-small {
+  padding: 9px 18px;
+  font-size: 13px;
+}
+
+
+/* ===================== الهيدر ===================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.logo-text {
+  width: 80px;
+}
+
+/* الحاوية الرئيسية للهيدر */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  gap: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #222;
+  font-size: 0.95rem;
+}
+
+.nav-cta-mobile {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #222;
+  border-radius: 2px;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* ===================== الجوالات والتابلت الصغير ===================== */
+
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-cta-desktop {
+    display: none;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: 70px;
+    inset-inline: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  }
+
+  .main-nav.open {
+    max-height: 400px;
+  }
+
+  .main-nav a {
+    padding: 14px 20px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .nav-cta-mobile {
+    display: inline-block;
+    margin: 16px 20px;
+    text-align: center;
+  }
+}
+
+
+/* =====================================================================
+   قسم الهيرو
+   تخطيط غير تقليدي: عمودان على الشاشات الكبيرة
+   العمود الأول (يمين بصريًا لأن الاتجاه RTL) = النص
+   العمود الثاني (يسار) = بطاقة معاينة القالب
+   ===================================================================== */
+
+.hero {
+  padding: 72px 0 96px;
+  position: relative;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+
+@media (min-width: 960px) {
+
+  .hero-inner {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+
+.hero-eyebrow {
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+.hero-title {
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--olive-dark);
+  max-width: 14ch;
+  margin-bottom: 22px;
+}
+
+.hero-desc {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin-bottom: 34px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 48px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-num {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--olive-dark);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+
+/* ---------- بطاقة معاينة القالب داخل الهيرو ---------- */
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transform: rotate(-3deg);
+  border: 1px solid var(--border);
+}
+
+.preview-card-topbar {
+  display: flex;
+  gap: 6px;
+  padding: 14px 18px;
+  background: var(--cream-soft);
+}
+
+.preview-card-topbar .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.preview-card-topbar .dot:nth-child(1) {
+  background: var(--gold);
+}
+
+.preview-card-body {
+  padding: 22px;
+}
+
+.preview-hero-block {
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  margin-bottom: 16px;
+}
+
+.preview-badge {
+  display: inline-block;
+  background: var(--olive);
+  color: var(--cream);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.preview-line {
+  height: 10px;
+  border-radius: 6px;
+  background: var(--olive-light);
+  opacity: 0.35;
+  margin-bottom: 8px;
+}
+
+.preview-line-lg {
+  width: 80%;
+  height: 14px;
+}
+
+.preview-line-sm {
+  width: 55%;
+}
+
+.preview-menu-row {
+  display: flex;
+  gap: 10px;
+}
+
+.preview-dish {
+  flex: 1;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    145deg,
+    var(--cream-soft),
+    var(--border)
+  );
+}
+
+.floating-chip {
+  position: absolute;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-card);
+  color: var(--olive-dark);
+}
+
+.chip-price {
+  top: 6%;
+  left: -4%;
+}
+
+.chip-live {
+  bottom: 8%;
+  right: -2%;
+  color: var(--gold);
+}
+
+
+/* =====================================================================
+   إصلاح بطاقة المعاينة على الشاشات الصغيرة
+   مهم:
+   لا نحول floating-chip إلى position: static
+   حتى لا تخرج الشارات من مكانها وتخرب شكل المعاينة.
+   ===================================================================== */
+
+@media (max-width: 500px) {
+
+  .hero-visual {
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  .preview-card {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .floating-chip {
+    position: absolute;
+    font-size: 11px;
+    padding: 7px 12px;
+    white-space: nowrap;
+  }
+
+  .chip-price {
+    top: 7%;
+    left: -1%;
+  }
+
+  .chip-live {
+    bottom: 7%;
+    right: -1%;
+  }
+}
+
+
+/* ---------- موبايلات صغيرة جدًا ---------- */
+
+@media (max-width: 380px) {
+
+  .hero {
+    padding-top: 45px;
+  }
+
+  .hero-visual {
+    padding: 0 4px;
+  }
+
+  .preview-card {
+    max-width: 330px;
+  }
+
+  .floating-chip {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .chip-price {
+    left: 0;
+  }
+
+  .chip-live {
+    right: 0;
+  }
+}
+
+
+/* ===================== عناوين الأقسام المشتركة ===================== */
+
+.section-heading {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 44px;
+}
+
+.section-heading h2 {
+  font-size: clamp(26px, 3.4vw, 36px);
+  font-weight: 700;
+  color: var(--olive-dark);
+  margin-bottom: 12px;
+}
+
+.section-heading p {
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+
+
+/* ===================== قسم القوالب ===================== */
+
+.templates-section {
+  padding: 40px 0 100px;
+}
+
+
+/* تبويبات التصنيف */
+
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.filter-tab {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-tab:hover {
+  border-color: var(--olive);
+  color: var(--olive-dark);
+}
+
+.filter-tab.active {
+  background: var(--olive);
+  border-color: var(--olive);
+  color: var(--cream);
+}
+
+
+/* شبكة الكروت */
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(280px, 1fr)
+  );
+  gap: 26px;
+}
+
+.template-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.template-card-image {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--cream-soft);
+}
+
+.template-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.template-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--white);
+  color: var(--olive-dark);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-card);
+}
+
+.template-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.template-name-ar {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.template-name-en {
+  font-size: 13px;
+  color: var(--ink-soft);
+  direction: ltr;
+  text-align: right;
+  margin-bottom: 14px;
+}
+
+.template-card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.template-card-actions .btn {
+  flex: 1;
+}
+
+
+/* ===================== قسم المميزات ===================== */
+
+.features-section {
+  padding: 90px 0;
+  background: var(--cream-soft);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(230px, 1fr)
+  );
+  gap: 34px;
+}
+
+.feature {
+  text-align: center;
+  padding: 10px;
+}
+
+.feature-icon {
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+.feature h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--olive-dark);
+  margin-bottom: 8px;
+}
+
+.feature p {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  max-width: 32ch;
+  margin: 0 auto;
+}
+
+
+/* =====================================================================
+   قسم خطوات الطلب - Timeline أفقي
+   عبارة عن ثلاث نقاط متصلة بخط أفقي واحد،
+   تتحول لخط عمودي على الجوال
+   ===================================================================== */
+
+.steps-section {
+  padding: 90px 0 110px;
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 760px) {
+
+  .timeline {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .timeline-line {
+    position: absolute;
+    top: 22px;
+    right: 16%;
+    left: 16%;
+    height: 2px;
+    background: var(--border);
+  }
+}
+
+.timeline-step {
+  text-align: center;
+  position: relative;
+}
+
+.timeline-dot {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--olive);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0 auto 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-step h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--olive-dark);
+  margin-bottom: 8px;
+}
+
+.timeline-step p {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  max-width: 30ch;
+  margin: 0 auto;
+}
+
+
+/* ===================== الفوتر ===================== */
+
+.site-footer {
+  background: var(--olive-dark);
+  color: var(--cream);
+  padding: 56px 0;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.site-footer .logo {
+  color: var(--cream);
+}
+
+.footer-note {
+  color: rgba(251, 248, 242, 0.7);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.site-footer .btn-outline {
+  border-color: var(--cream);
+  color: var(--cream);
+}
+
+.site-footer .btn-outline:hover {
+  background: var(--cream);
+  color: var(--olive-dark);
+}
+
+
+/* =====================================================================
+   أنيميشن الظهور عند التمرير
+   تُضاف فئة "in-view" عبر script.js باستخدام IntersectionObserver
+   ===================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
