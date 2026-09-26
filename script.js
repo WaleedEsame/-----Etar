@@ -76,7 +76,7 @@ const TEMPLATES = [
     name_ar: "قطاف وقصه",
     name_en: "Bean & Tale",
     image: "./قِطاف.png",
-    previewLink: "https://8taf.vercel.app",
+    previewLink: "https://8taf.vercel.app/",
     whatsappMessage: "مرحبًا، أرغب بطلب قالب  قطاف"
   },
   {
