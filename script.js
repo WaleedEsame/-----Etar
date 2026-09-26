@@ -15,7 +15,7 @@
    ضع هنا رقم الواتساب بصيغة دولية بدون + وبدون مسافات، مثال:
    "9665XXXXXXXX" (السعودية) أو "20XXXXXXXXXX" (مصر)
 --------------------------------------------------------------------- */
-const WHATSAPP_NUMBER = "966500000000";
+const WHATSAPP_NUMBER = "+201080732859";
 
 
 /* ---------------------------------------------------------------------
@@ -64,111 +64,93 @@ const TEMPLATES = [
   {
     id: 1,
     category: "مطعم",
-    name_ar: "مذاق البيت",
+    name_ar: "بيت الجدعنه",
     name_en: "Home Taste",
-    image: "",
-    previewLink: "https://example.com/preview/bean-tale",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب بن وحكاية"
+    image: "./بيت الجدعنة.png",
+    previewLink: "https://peataljdana.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب بيت الجدعنه "
   },
   {
     id: 2,
     category: "مشروب",
     name_ar: "قطاف وقصه",
     name_en: "Bean & Tale",
-    image: "./قطاف.png",
-    previewLink: "8taf.vercel.app",
+    image: "./قِطاف.png",
+    previewLink: "https://8taf.vercel.app",
     whatsappMessage: "مرحبًا، أرغب بطلب قالب  قطاف"
   },
   {
     id: 3,
     category: "فاست فود",
-    name_ar: "سناك بوينت",
+    name_ar: "FEANE",
     name_en: "Snack Point",
-    image: "https://picsum.photos/seed/snack-point/600/450",
-    previewLink: "https://example.com/preview/snack-point",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب سناك بوينت"
+    image: "./FEANE.png",
+    previewLink: "https://feane-umber.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب  FEANE "
   },
   {
     id: 4,
     category: "مطعم",
-    name_ar: "زيتون وليمون",
+    name_ar: "أوستيريا أكس",
     name_en: "Olive & Lemon",
-    image: "https://picsum.photos/seed/olive-lemon/600/450",
-    previewLink: "https://example.com/preview/olive-lemon",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب زيتون وليمون"
+    image: "./أوستيريا إكس.png",
+    previewLink: "https://ostera-five.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب أوستيريا أكس"
   },
   {
     id: 5,
     category: "كافيه",
-    name_ar: "ركن الصباح",
+    name_ar: "Lungola",
     name_en: "Morning Corner",
-    image: "https://picsum.photos/seed/morning-corner/600/450",
-    previewLink: "https://example.com/preview/morning-corner",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب ركن الصباح"
+    image: "./Lungola.png",
+    previewLink: "https://lungola.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب Lungola"
   },
   {
     id: 6,
     category: "فاست فود",
-    name_ar: "برجر لاين",
+    name_ar: "SizzleHouse",
     name_en: "Burger Line",
-    image: "https://picsum.photos/seed/burger-line/600/450",
-    previewLink: "https://example.com/preview/burger-line",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب برجر لاين"
+    image: "./SizzleHouse.png",
+    previewLink: "https://sizzlehouse.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب SizzleHouse"
   },
   {
     id: 7,
     category: "مطعم",
-    name_ar: "توابل الشرق",
+    name_ar: "تذوّق",
     name_en: "Eastern Spice",
-    image: "https://picsum.photos/seed/eastern-spice/600/450",
-    previewLink: "https://example.com/preview/eastern-spice",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب توابل الشرق"
+    image: "./تذوّق.png",
+    previewLink: "https://tdo8.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب تذوّق "
   },
   {
     id: 8,
     category: "كافيه",
-    name_ar: "غيمة قهوة",
+    name_ar: "EmberLounge",
     name_en: "Coffee Cloud",
-    image: "https://picsum.photos/seed/coffee-cloud/600/450",
-    previewLink: "https://example.com/preview/coffee-cloud",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب غيمة قهوة"
-  },
-  {
-    id: 9,
-    category: "فاست فود",
-    name_ar: "كرسبي هب",
-    name_en: "Crispy Hub",
-    image: "https://picsum.photos/seed/crispy-hub/600/450",
-    previewLink: "https://example.com/preview/crispy-hub",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب كرسبي هب"
+    image: "./EmberLounge.png",
+    previewLink: "https://ember-lounge-ochre.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب EmberLounge"
   },
   {
     id: 10,
     category: "مطعم",
-    name_ar: "مائدة الفصول",
+    name_ar: "basteit",
     name_en: "Seasons Table",
-    image: "https://picsum.photos/seed/seasons-table/600/450",
-    previewLink: "https://example.com/preview/seasons-table",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب مائدة الفصول"
+    image: "./basteit.png",
+    previewLink: "https://tasteit-steel.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب basteit"
   },
   {
     id: 11,
     category: "كافيه",
-    name_ar: "دفتر القهوة",
+    name_ar: "ديوان",
     name_en: "Coffee Notebook",
-    image: "https://picsum.photos/seed/coffee-notebook/600/450",
-    previewLink: "https://example.com/preview/coffee-notebook",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب دفتر القهوة"
+    image: "./ديوان.png",
+    previewLink: "https://duwon-flame.vercel.app/",
+    whatsappMessage: "مرحبًا، أرغب بطلب قالب ديوان"
   },
-  {
-    id: 12,
-    category: "فاست فود",
-    name_ar: "سريع ولذيذ",
-    name_en: "Quick Bite",
-    image: "https://picsum.photos/seed/quick-bite/600/450",
-    previewLink: "https://example.com/preview/quick-bite",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب سريع ولذيذ"
-  }
 ];
 
 

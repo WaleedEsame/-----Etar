@@ -31,6 +31,10 @@
   --shadow-card: 0 8px 24px rgba(62, 70, 41, 0.06);
 
   --font: 'IBM Plex Sans Arabic', 'Tahoma', sans-serif;
+
+  /* أبعاد إطار الموبايل داخل الكارد (ثابتة لكل الكروت مهما كانت نسبة الصورة) */
+  --phone-w: 190px;
+  --phone-ratio: 9 / 19;
 }
 
 
@@ -639,23 +643,61 @@ button:focus-visible {
   flex-direction: column;
 }
 
+
+/* ---------- صورة الكارد على شكل موبايل ---------- */
+
 .template-card-image {
   position: relative;
-  aspect-ratio: 4 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 26px 16px 22px;
+  background: radial-gradient(
+    circle at 50% 30%,
+    var(--white) 0%,
+    var(--cream-soft) 70%
+  );
   overflow: hidden;
-  background: var(--cream-soft);
 }
 
 .template-card-image img {
-  width: 100%;
-  height: 100%;
+  width: 65%;
+  max-width: 190px;
+  height: auto;
+  aspect-ratio: var(--phone-ratio);   /* auto = بدون قص، غيّرها في :root */
   object-fit: cover;
+  object-position: top center;   /* يعرض أول الصفحة حتى لو الصورة أطول */
+  border: 5px solid #1d1d17;
+  border-radius: 26px;
+  background: var(--white);
+  box-shadow: 0 18px 30px rgba(43, 42, 34, 0.22);
+  transition: transform 0.3s ease;
+}
+
+.template-card:hover .template-card-image img {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* النوتش (الفتحة العلوية) */
+
+.template-card-image::after {
+  content: "";
+  position: absolute;
+  top: 33px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 6px;
+  border-radius: 6px;
+  background: #1d1d17;
+  z-index: 1;
 }
 
 .template-badge {
   position: absolute;
   top: 12px;
   right: 12px;
+  z-index: 2;
   background: var(--white);
   color: var(--olive-dark);
   font-size: 12px;
@@ -695,6 +737,66 @@ button:focus-visible {
 
 .template-card-actions .btn {
   flex: 1;
+}
+
+
+/* ---------- كروت القوالب على الجوال: عمودين ---------- */
+/* لازم يكون بعد الكود الأساسي للكروت فوق */
+
+@media (max-width: 600px) {
+
+  .templates-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .template-card-image {
+    padding: 18px 0px 16px;
+  }
+
+  .template-card-image img {
+    width: 100%;
+    border-width: 4px;
+    border-radius: 20px;
+  }
+
+  .template-card-image::after {
+    top: 24px;
+    width: 26px;
+    height: 5px;
+  }
+
+  .template-badge {
+    top: 8px;
+    right: 8px;
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .template-card-body {
+    padding: 14px 12px;
+  }
+
+  .template-name-ar {
+    font-size: 15px;
+  }
+
+  .template-name-en {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .template-card-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .template-card-actions .btn {
+    flex: none;
+    width: 100%;
+    padding: 9px 10px;
+    font-size: 13px;
+  }
 }
 
 
