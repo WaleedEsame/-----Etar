@@ -1,273 +1,300 @@
 /* =====================================================================
-   ملف JavaScript - قوالب مواقع مطاعم/كافيهات/فاست فود
-   =====================================================================
-   محتويات الملف:
-   1) رقم الواتساب (متغير واحد يُستخدم في كل روابط الطلب)
-   2) مصفوفة بيانات القوالب (المصدر الوحيد للحقيقة لكل القوالب)
-   3) دوال بناء التبويبات وكروت القوالب من البيانات
-   4) منطق الفلترة حسب التصنيف
-   5) أنيميشن الظهور عند التمرير
+   منصة إطار - ETAR TEMPLATES
+   ملف البرمجة التفاعلي (script.js)
    ===================================================================== */
 
+document.addEventListener('DOMContentLoaded', () => {
 
-/* ---------------------------------------------------------------------
-   1) رقم الواتساب
-   ضع هنا رقم الواتساب بصيغة دولية بدون + وبدون مسافات، مثال:
-   "9665XXXXXXXX" (السعودية) أو "20XXXXXXXXXX" (مصر)
---------------------------------------------------------------------- */
-const WHATSAPP_NUMBER = "+201080732859";
+  // بيانات التصنيفات
+  const categories = [
+    { id: 'all', name: 'الكل ◍', icon: 'fa-layer-group' },
+    { id: 'restaurants', name: 'مطاعم 🍽️', icon: 'fa-utensils' },
+    { id: 'cafes', name: 'كافيهات ☕', icon: 'fa-mug-hot' },
+    { id: 'fastfood', name: 'فاست فود 🍔', icon: 'fa-burger' }
+  ];
 
-
-/* ---------------------------------------------------------------------
-   2) مصفوفة بيانات القوالب
-   ---------------------------------------------------------------------
-   كل عنصر يمثل قالب واحد وله الحقول التالية:
-
-   id              : رقم تعريفي فريد لكل قالب (رقم صحيح)
-   category        : أحد ثلاث قيم فقط بالضبط: "مطعم" أو "كافيه" أو "فاست فود"
-                      (التبويبات تُبنى تلقائيًا من هذه القيم)
-   name_ar         : اسم القالب بالعربي (يظهر كبير في الكارت)
-   name_en         : اسم القالب بالإنجليزي (يظهر صغير تحت الاسم العربي)
-   image           : رابط صورة معاينة القالب (يفضّل مقاس أفقي 4:3)
-   previewLink     : رابط المعاينة الحية للقالب (رابط خارجي)
-   whatsappMessage : نص الرسالة التي تُرسل تلقائيًا عند الضغط على "اطلب عبر واتساب"
-
-   ---------------------------------------------------------------------
-   مثال لإضافة قالب جديد (انسخ الكتلة التالية وعدّل قيمها ثم أضفها
-   داخل المصفوفة TEMPLATES في أي مكان قبل القوس الأخير ]):
-
-   {
-     id: 13,
-     category: "كافيه",
-     name_ar: "كافيه لافندر",
-     name_en: "Lavender Cafe",
-     image: "https://picsum.photos/seed/lavender-cafe/600/450",
-     previewLink: "https://example.com/preview/lavender-cafe",
-     whatsappMessage: "مرحبًا، أرغب بطلب قالب كافيه لافندر"
-   },
-
---------------------------------------------------------------------- */
-
-// ===================== الهيدر ===================== >
-
-const menuToggle = document.getElementById('menuToggle');
-const mainNav = document.getElementById('mainNav');
-
-menuToggle.addEventListener('click', () => {
-  const isOpen = mainNav.classList.toggle('open');
-  menuToggle.classList.toggle('active', isOpen);
-  menuToggle.setAttribute('aria-expanded', isOpen);
-});
-
-// --------------------------------------------------------------------- */
-const TEMPLATES = [
-  {
-    id: 1,
-    category: "مطعم",
-    name_ar: "بيت الجدعنه",
-    name_en: "Home Taste",
-    image: "./بيت الجدعنة.png",
-    previewLink: "https://peataljdana.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب بيت الجدعنه "
-  },
-  {
-    id: 2,
-    category: "مشروب",
-    name_ar: "قطاف وقصه",
-    name_en: "Bean & Tale",
-    image: "./قِطاف.png",
-    previewLink: "https://8taf.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب  قطاف"
-  },
-  {
-    id: 3,
-    category: "فاست فود",
-    name_ar: "FEANE",
-    name_en: "Snack Point",
-    image: "./FEANE.png",
-    previewLink: "https://feane-umber.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب  FEANE "
-  },
-  {
-    id: 4,
-    category: "مطعم",
-    name_ar: "أوستيريا أكس",
-    name_en: "Olive & Lemon",
-    image: "./أوستيريا إكس.png",
-    previewLink: "https://ostera-five.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب أوستيريا أكس"
-  },
-  {
-    id: 5,
-    category: "كافيه",
-    name_ar: "Lungola",
-    name_en: "Morning Corner",
-    image: "./Lungola.png",
-    previewLink: "https://lungola.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب Lungola"
-  },
-  {
-    id: 6,
-    category: "فاست فود",
-    name_ar: "SizzleHouse",
-    name_en: "Burger Line",
-    image: "./SizzleHouse.png",
-    previewLink: "https://sizzlehouse.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب SizzleHouse"
-  },
-  {
-    id: 7,
-    category: "مطعم",
-    name_ar: "تذوّق",
-    name_en: "Eastern Spice",
-    image: "./تذوّق.png",
-    previewLink: "https://tdo8.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب تذوّق "
-  },
-  {
-    id: 8,
-    category: "كافيه",
-    name_ar: "EmberLounge",
-    name_en: "Coffee Cloud",
-    image: "./EmberLounge.png",
-    previewLink: "https://ember-lounge-ochre.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب EmberLounge"
-  },
-  {
-    id: 10,
-    category: "مطعم",
-    name_ar: "basteit",
-    name_en: "Seasons Table",
-    image: "./basteit.png",
-    previewLink: "https://tasteit-steel.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب basteit"
-  },
-  {
-    id: 11,
-    category: "كافيه",
-    name_ar: "ديوان",
-    name_en: "Coffee Notebook",
-    image: "./ديوان.png",
-    previewLink: "https://duwon-flame.vercel.app/",
-    whatsappMessage: "مرحبًا، أرغب بطلب قالب ديوان"
-  },
-];
-
-
-/* ---------------------------------------------------------------------
-   عناصر DOM المستخدمة
---------------------------------------------------------------------- */
-const filterTabsEl = document.getElementById("filterTabs");
-const templatesGridEl = document.getElementById("templatesGrid");
-
-/* التصنيف الحالي المُفعّل، "الكل" يعني عرض كل القوالب */
-let activeCategory = "الكل";
-
-
-/* ---------------------------------------------------------------------
-   بناء رابط واتساب كامل من رقم الهاتف ونص الرسالة
-   encodeURIComponent يحمي النص العربي والرموز الخاصة داخل الرابط
---------------------------------------------------------------------- */
-function buildWhatsappLink(message) {
-  const encodedMessage = encodeURIComponent(message);
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-}
-
-
-/* ---------------------------------------------------------------------
-   بناء تبويبات التصنيف تلقائيًا من القيم الموجودة فعليًا في TEMPLATES
-   بحيث لو أضفت تصنيف جديد لاحقًا، يظهر تبويبه تلقائيًا بدون تعديل يدوي
---------------------------------------------------------------------- */
-function renderFilterTabs() {
-  // استخراج التصنيفات الفريدة من البيانات مع الحفاظ على ترتيب ظهورها الأول
-  const uniqueCategories = [...new Set(TEMPLATES.map(t => t.category))];
-  const categories = ["الكل", ...uniqueCategories];
-
-  filterTabsEl.innerHTML = categories.map(cat => {
-    const isActive = cat === activeCategory ? "active" : "";
-    return `<button class="filter-tab ${isActive}" data-category="${cat}" role="tab">${cat}</button>`;
-  }).join("");
-
-  // ربط حدث الضغط بكل زر تبويب
-  filterTabsEl.querySelectorAll(".filter-tab").forEach(btn => {
-    btn.addEventListener("click", () => {
-      activeCategory = btn.dataset.category;
-      renderFilterTabs();   // إعادة رسم التبويبات لتحديث حالة "active"
-      renderTemplatesGrid(); // إعادة رسم الكروت حسب الفلتر الجديد
-    });
-  });
-}
-
-
-/* ---------------------------------------------------------------------
-   بناء شبكة كروت القوالب حسب التصنيف المُفعّل حاليًا
---------------------------------------------------------------------- */
-function renderTemplatesGrid() {
-  const list = activeCategory === "الكل"
-    ? TEMPLATES
-    : TEMPLATES.filter(t => t.category === activeCategory);
-
-  templatesGridEl.innerHTML = list.map(t => `
-    <article class="template-card reveal">
-      <div class="template-card-image">
-        <img src="${t.image}" alt="معاينة قالب ${t.name_ar}" loading="lazy">
-        <span class="template-badge">${t.category}</span>
-      </div>
-      <div class="template-card-body">
-        <span class="template-name-ar">${t.name_ar}</span>
-        <span class="template-name-en">${t.name_en}</span>
-        <div class="template-card-actions">
-          <a class="btn btn-outline btn-small" href="${t.previewLink}" target="_blank" rel="noopener">معاينة حية</a>
-          <a class="btn btn-primary btn-small" href="${buildWhatsappLink(t.whatsappMessage)}" target="_blank" rel="noopener">اطلب عبر واتساب</a>
-        </div>
-      </div>
-    </article>
-  `).join("");
-
-  // تفعيل مراقبة الظهور على الكروت المُضافة حديثًا
-  observeRevealElements();
-}
-
-
-/* ---------------------------------------------------------------------
-   أنيميشن الظهور عند التمرير
-   نستخدم IntersectionObserver: كل عنصر يحمل فئة "reveal" يبدأ مخفيًا
-   قليلًا (انظر style.css)، وبمجرد دخوله نطاق الشاشة تُضاف له فئة
-   "in-view" التي تشغّل الانتقال (fade + slide up) عبر CSS.
---------------------------------------------------------------------- */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("in-view");
-      revealObserver.unobserve(entry.target); // لا داعي لمراقبته بعد ظهوره مرة
+  /* =====================================================================
+     ⭐⭐⭐ القوالب ⭐⭐⭐
+     لينك صفحة القالب بيتحط في الحقل previewUrl
+     دور على العلامة:  👈 حط لينك القالب هنا
+     ===================================================================== */
+  const templates = [
+    {
+      id: 1,
+      nameAr: 'بيت الجدعنه',
+      nameEn: 'Home Taste',
+      category: 'restaurants',
+      categoryLabel: 'مطعم',
+      price: '749 ج.م',
+      badge: 'مميز ⭐',
+      image: './بيت الجدعنة.png',
+      previewUrl: 'https://peataljdana.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['منيو تفاعلي', 'طلب واتساب', 'تصميم شعبي']
+    },
+    {
+      id: 2,
+      nameAr: 'قطاف وقصه',
+      nameEn: 'Bean & Tale',
+      category: 'cafes',
+      categoryLabel: 'مشروبات',
+      price: '599 ج.م',
+      badge: 'جديد ✨',
+      image: './قِطاف.png',
+      previewUrl: 'https://8taf.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['مشروبات خاصة', 'منيو تفاعلي', 'سريع جداً']
+    },
+    {
+      id: 3,
+      nameAr: 'FEANE',
+      nameEn: 'Snack Point',
+      category: 'fastfood',
+      categoryLabel: 'فاست فود',
+      price: '699 ج.م',
+      badge: 'الأكثر طلباً 🔥',
+      image: './FEANE.png',
+      previewUrl: 'https://feane-umber.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['وجبات سريعة', 'عروض دليفري', 'سريع ']
+    },
+    {
+      id: 4,
+      nameAr: 'أوستيريا أكس',
+      nameEn: 'Olive & Lemon',
+      category: 'restaurants',
+      categoryLabel: 'مطعم إيطالي',
+      price: '799 ج.م',
+      badge: 'فخم 🌟',
+      image: './أوستيريا إكس.png',
+      previewUrl: 'https://ostera-five.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['مأكولات إيطالية', 'منيو راقي', 'تصميم فاخر']
+    },
+    {
+      id: 5,
+      nameAr: 'Lungola',
+      nameEn: 'Morning Corner',
+      category: 'cafes',
+      categoryLabel: 'كافيه عصري',
+      price: '798 ج.م',
+      badge: 'عصري 🍵',
+      image: './Lungola.png',
+      previewUrl: 'https://lungola.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['مشروبات باردة', 'منيو راقي', 'سريع']
+    },
+    {
+      id: 6,
+      nameAr: 'SizzleHouse',
+      nameEn: 'Burger Line',
+      category: 'fastfood',
+      categoryLabel: 'برجر',
+      price: '599 ج.م',
+      badge: 'شائع 🍔',
+      image: './SizzleHouse.png',
+      previewUrl: 'https://sizzlehouse.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['وجبات سريعة', 'عروض دليفري', 'منيو تفاعلي']
+    },
+    {
+      id: 7,
+      nameAr: 'تذوّق',
+      nameEn: 'Eastern Spice',
+      category: 'restaurants',
+      categoryLabel: 'مطعم شرقي',
+      price: '649 ج.م',
+      badge: 'جديد ✨',
+      image: './تذوّق.png',
+      previewUrl: 'https://tdo8.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['مأكولات شرقية', 'منيو تفاعلي', 'طلب واتساب']
+    },
+    {
+      id: 8,
+      nameAr: 'EmberLounge',
+      nameEn: 'Coffee Cloud',
+      category: 'cafes',
+      categoryLabel: 'مقهى سحابي',
+      price: '699 ج.م',
+      badge: 'مميز ⭐',
+      image: './EmberLounge.png',
+      previewUrl: 'https://ember-lounge-ochre.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['مشروبات خاصة', 'تصميم هادئ', 'سريع']
+    },
+    {
+      id: 9,
+      nameAr: 'basteit',
+      nameEn: 'Seasons Table',
+      category: 'restaurants',
+      categoryLabel: 'مطعم',
+      price: '749 ج.م',
+      badge: 'شائع 🔥',
+      image: './basteit.png',
+      previewUrl: 'https://tasteit-steel.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['منيو تفاعلي', 'عرض صور', 'طلب واتساب']
+    },
+    {
+      id: 10,
+      nameAr: 'ديوان',
+      nameEn: 'Coffee Notebook',
+      category: 'cafes',
+      categoryLabel: 'كافيه',
+      price: '599 ج.م',
+      badge: 'جديد ✨',
+      image: './ديوان.png',
+      previewUrl: 'https://duwon-flame.vercel.app/', // 👈 حط لينك القالب هنا
+      tags: ['مشروبات ساخنة', 'منيو تفاعلي', 'تصميم هادئ']
     }
-  });
-}, { threshold: 0.15 });
+  ];
 
-function observeRevealElements() {
-  document.querySelectorAll(".reveal:not(.in-view)").forEach(el => {
-    revealObserver.observe(el);
-  });
-}
+  // رقم الواتساب بصيغة دولية بدون + (مطلوب لرابط wa.me)
+  const whatsappPhone = '201080732859';
 
+  const filterTabsContainer = document.getElementById('filterTabs');
+  const templatesGridContainer = document.getElementById('templatesGrid');
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
 
-/* ---------------------------------------------------------------------
-   تفعيل فئة "reveal" على العناصر الثابتة في الصفحة (خارج الشبكة الديناميكية)
-   مثل عناصر قسم المميزات وقسم الخطوات
---------------------------------------------------------------------- */
-function markStaticRevealTargets() {
-  document.querySelectorAll(".feature, .timeline-step").forEach(el => {
-    el.classList.add("reveal");
-  });
-}
+  // بناء التبويبات
+  function renderFilterTabs() {
+    if (!filterTabsContainer) return;
+    filterTabsContainer.innerHTML = categories.map((cat, index) => `
+      <button class="filter-tab ${index === 0 ? 'active' : ''}" data-category="${cat.id}">
+        <i class="fa-solid ${cat.icon}"></i>
+        <span>${cat.name}</span>
+      </button>
+    `).join('');
 
+    const tabs = filterTabsContainer.querySelectorAll('.filter-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderTemplates(tab.getAttribute('data-category'));
+      });
+    });
+  }
 
-/* ---------------------------------------------------------------------
-   نقطة انطلاق الصفحة بعد تحميل DOM بالكامل
---------------------------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", () => {
+  // بناء شبكة القوالب
+  function renderTemplates(categoryFilter = 'all') {
+    if (!templatesGridContainer) return;
+
+    const filteredTemplates = categoryFilter === 'all'
+      ? templates
+      : templates.filter(t => t.category === categoryFilter);
+
+    templatesGridContainer.innerHTML = filteredTemplates.map(template => {
+      const waMsg = encodeURIComponent(`مرحباً! أود طلب قالب: ${template.nameAr} (${template.nameEn}) - السعر: ${template.price}`);
+      const waUrl = `https://wa.me/${whatsappPhone}?text=${waMsg}`;
+
+      return `
+        <div class="template-card reveal in-view" data-id="${template.id}">
+          <div class="template-card-image">
+            <span class="template-badge">${template.badge}</span>
+            <img src="${template.image}" alt="${template.nameAr}" loading="lazy">
+          </div>
+
+          <div class="template-card-body">
+            <div class="template-header-row">
+              <div>
+                <h3 class="template-name-ar">${template.nameAr}</h3>
+                <span class="template-name-en">${template.nameEn}</span>
+              </div>
+              <span class="template-price">${template.price}</span>
+            </div>
+
+            <div class="template-tags">
+              ${template.tags.map(t => `<span class="tag-item"><i class="fa-solid fa-check" style="font-size: 9px; color: var(--olive);"></i> ${t}</span>`).join('')}
+            </div>
+
+            <div class="template-card-actions">
+              <!-- زرار المعاينة: بيفتح صفحة القالب نفسها في تبويب جديد -->
+              <a href="${template.previewUrl}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                <i class="fa-solid fa-eye"></i>
+                <span>معاينة حية</span>
+              </a>
+              <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>طلب القالب</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  /* =====================================================================
+     مودال المعاينة (متعطل حالياً - لأن المعاينة بقت تفتح لينك القالب)
+     لو حبيت ترجعه، شيل علامات التعليق وارجع الزرار لـ button
+     =====================================================================
+
+  const previewModal = document.getElementById('previewModal');
+  const modalClose = document.getElementById('modalClose');
+  const modalTitle = document.getElementById('modalTemplateTitle');
+  const modalCategory = document.getElementById('modalTemplateCat');
+  const previewIframe = document.getElementById('previewIframe');
+  const iframeLoader = document.getElementById('iframeLoader');
+  const modalWhatsappBtn = document.getElementById('modalWhatsappBtn');
+
+  function openModal(title, cat, url, waUrl) {
+    if (!previewModal) return;
+    modalTitle.textContent = title;
+    modalCategory.textContent = cat;
+    modalWhatsappBtn.href = waUrl;
+    iframeLoader.style.display = 'flex';
+    previewIframe.src = url;
+    previewIframe.onload = () => { iframeLoader.style.display = 'none'; };
+    previewModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    if (!previewModal) return;
+    previewModal.classList.remove('active');
+    previewIframe.src = '';
+    document.body.style.overflow = 'auto';
+  }
+
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (previewModal) {
+    previewModal.addEventListener('click', (e) => {
+      if (e.target === previewModal) closeModal();
+    });
+  }
+  ===================================================================== */
+
+  // القائمة في الموبايل
+  if (menuToggle && mainNav) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      menuToggle.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        menuToggle.classList.remove('active');
+      });
+    });
+  }
+
+  // أنيميشن التمرير Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // زر العودة للأعلى
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.style.opacity = window.scrollY > 400 ? '1' : '0';
+      scrollTopBtn.style.pointerEvents = window.scrollY > 400 ? 'auto' : 'none';
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   renderFilterTabs();
-  renderTemplatesGrid();
-  markStaticRevealTargets();
-  observeRevealElements();
+  renderTemplates('all');
 });
